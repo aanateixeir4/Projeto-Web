@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CinePoços - Página Principal</title>
+    <style>
+    
+        :root {
+            --primary-color: #d4167f;
+            --dark-color: #141414;
+            --light-color: #f4f4f4;
+            --accent-color: #f5c518;
+            --secondary-color: #6e6e6e;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+        
+        body {
+            background-color: var(--dark-color);
+            color: var(--light-color);
+            line-height: 1.6;
+        }
+        
+        a {
+            text-decoration: none;
+            color: var(--light-color);
+        }
+        
+        ul {
+            list-style: none;
+        }
+        
+        .header {
+            background-color: rgba(0, 0, 0, 0.9);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            padding: 1rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+        
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            letter-spacing: -1px;
+        }
+        
+        .logo span {
+            color: var(--light-color);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary-color);
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    
+
+        .main {
+            padding-top: 80px;
+            min-height: 100vh;
+        }
+        
+        .hero-banner {
+            height: 70vh;
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.4)), 
+                        url('img/Wicked fundo pagina principal') no-repeat center center/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 5rem;
+        }
+        
+        .hero-content {
+            max-width: 600px;
+        }
+        
+        .hero-title {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero-description {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+        }
+        
+        .btn-primary:hover {
+            background-color: #d4167f;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background-color: rgba(109, 109, 110, 0.7);
+            color: white;
+            border: none;
+        }
+        
+        .btn-secondary:hover {
+            background-color: rgba(109, 109, 110, 0.9);
+            transform: translateY(-2px);
+        }
+        
+        .section {
+            padding: 2rem 5rem;
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .section-title a {
+            font-size: 0.9rem;
+            color: var(--primary-color);
+        }
+        
+        .section-title a:hover {
+            text-decoration: underline;
+        }
+        
+        .movie-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .movie-card {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+        
+        .movie-card:hover {
+            transform: scale(1.05);
+        }
+        
+        .movie-poster {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .movie-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+            padding: 1rem;
+            color: white;
+        }
+        
+        .movie-title {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .movie-info {
+            font-size: 0.8rem;
+            color: var(--secondary-color);
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .genre-nav {
+            background-color: rgba(20, 20, 20, 0.9);
+            padding: 1rem 5rem;
+            display: flex;
+            gap: 2rem;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+        
+        .genre-nav::-webkit-scrollbar {
+            display: none; 
+        }
+        
+        .genre-link {
+            white-space: nowrap;
+            font-weight: 500;
+            padding: 0.5rem 0;
+            position: relative;
+            color: var(--secondary-color);
+            transition: color 0.3s;
+        }
+        
+        .genre-link:hover, .genre-link.active {
+            color: var(--primary-color);
+        }
+        
+        .genre-link.active::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary-color);
+        }
+        
+        .footer {
+            background-color: rgba(0, 0, 0, 0.9);
+            padding: 3rem 5rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-links-title {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
+        }
+        
+        .footer-links-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .footer-links-list a {
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+        
+        .footer-links-list a:hover {
+            color: var(--primary-color);
+        }
+        
+        .copyright {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--secondary-color);
+            color: var(--secondary-color);
+            font-size: 0.8rem;
+            text-align: center;
+        }
+        
+        @media (max-width: 1024px) {
+            .hero-banner, .section {
+                padding: 0 3rem;
+            }
+            
+            .genre-nav {
+                padding: 1rem 3rem;
+            }
+            
+            .footer {
+                padding: 2rem 3rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header {
+                padding: 1rem;
+            }
+            
+            .hero-banner {
+                height: 60vh;
+                padding: 0 2rem;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .hero-description {
+                font-size: 1rem;
+            }
+            
+            .section {
+                padding: 2rem;
+            }
+            
+            .movie-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+            
+            .movie-poster {
+                height: 225px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero-banner {
+                height: 50vh;
+                padding: 0 1rem;
+                justify-content: flex-end;
+                padding-bottom: 2rem;
+            }
+            
+            .hero-title {
+                font-size: 1.5rem;
+            }
+            
+            .hero-actions {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .section {
+                padding: 1.5rem;
+            }
+            
+            .movie-grid {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+                gap: 1rem;
+            }
+            
+            .movie-poster {
+                height: 180px;
+            }
+            
+            .footer {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="logo">Cine<span>Poços</span></div>
+        <nav class="nav-links">
+            <a href="paginaPrincipal.html" class="active">Início</a>
+            <a href="filmes.html">Filmes</a>
+            <a href="trailers.html">Trailers</a>
+            <a href="trilhaSonora.html">Trilha Sonora</a>
+            <a href="contatos.html">Contatos</a>
+            <a href="sobre.html">Sobre</a>
+        </nav>
+        <div class="user-menu">
+            <div class="user-avatar">U</div>
+        </div>
+    </header>
+
+    <main class="main">
+        <section class="hero-banner">
+            <div class="hero-content">
+                <h1 class="hero-title">Wicked</h1>
+                <p class="hero-description">Elphaba e Glinda se tornam amigas na juventude, mas um encontro com o Mágico de Oz muda tudo e coloca suas escolhas e destinos em conflito.</p>
+                <div class="hero-actions">
+                    <a href="#" class="btn btn-primary">Assistir Agora</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Continuar Assistindo</h2>
+            <div class="movie-grid">
+                <a href="detalhesFilmeDead.html" class="movie-card">
+                    <img src="img/Deadpool & Wolverine Poster Promocional" alt="Deadpool & Wolverine" class="movie-poster">
+                    <div class="movie-overlay">
+                        <h3 class="movie-title">Deadpool & Wolverine</h3>
+                        <div class="movie-info">
+                            <span>2024</span>
+                            <span>69% assistido</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="detalheFilmeComo.html" class="movie-card">
+                    <img src="img/Como Treinar seu Dragão 3 Poster Promocional" alt="Como Treinar seu Dragão 3" class="movie-poster">
+                    <div class="movie-overlay">
+                        <h3 class="movie-title">Como Treinar seu Dragão 3</h3>
+                        <div class="movie-info">
+                            <span>2019</span>
+                            <span>45% assistido</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="detalhesFilmePantera.html" class="movie-card">
+                    <img src="img/Pantera Negra Poster Promocional" alt="Pantera Negra" class="movie-poster">
+                    <div class="movie-overlay">
+                        <h3 class="movie-title">Pantera Negra</h3>
+                        <div class="movie-info">
+                            <span>2018</span>
+                            <span>32% assistido</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="detalhesFilmeDoutor1.html" class="movie-card">
+                    <img src="img/Doutor Estranho Poster Promocional" alt="Doutor Estranho" class="movie-poster">
+                    <div class="movie-overlay">
+                        <h3 class="movie-title">Doutor Estranho</h3>
+                        <div class="movie-info">
+                            <span>2016</span>
+                            <span>28% assistido</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Populares na CinePoços</h2>
+            <div class="movie-grid">
+                <a href="detalhesFilmeInter.html" class="movie-card">
+                    <img src="img/Interstellar Poster Promocional" alt="Interestelar" class="movie-poster">
+                    <div class="movie-overlay">
+                        <h3 class="movie-title">Interestelar</h3>
+                        <div class="movie-info">
+                            <span>2014</span>
+                            <span>★★★★★</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="detalhesFilmeParaT.html" class="movie-card">
+                    <img src="img/Para todos os_garotos_que ja amei Poster" alt="Para Todos os Garotos que Já Amei" class="movie-poster">
+                    <div class="movie-overlay">
+                        <h3 class="movie-title">Para Todos os Garotos...</h3>
+                        <div class="movie-info">
+                            <span>2018</span>
+                            <span>★★★★☆</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="detalhesFilmeAlice.html" class="movie-card">
+                    <img src="img/Alice no País das Maravilhas Poster Promocional" alt="Alice no País das Maravilhas" class="movie-poster">
+                    <div class="movie-overlay">
+                        <h3 class="movie-title">Alice no País das Maravilhas</h3>
+                        <div class="movie-info">
+                            <span>2010</span>
+                            <span>★★★★★</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="detalhesFilmeHomem.html" class="movie-card">
+                    <img src="img/Homem com H Poster Promocional" alt="Homem com H" class="movie-poster">
+                    <div class="movie-overlay">
+                        <h3 class="movie-title">Homem com H</h3>
+                        <div class="movie-info">
+                            <span>2025</span>
+                            <span>★★★★☆</span>
+                        </div>
+                    </div>
+                </a>
+                

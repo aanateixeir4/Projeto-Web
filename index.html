@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CinePoços - Locadora Online</title>
+    <style>
+        :root {
+            --primary-color: #d4167f;
+            --dark-color: #141414;
+            --light-color: #f4f4f4;
+            --accent-color: #f5c518;
+            --secondary-color: #6e6e6e;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+        
+        body {
+            background-color: var(--dark-color);
+            color: var(--light-color);
+            line-height: 1.6;
+        }
+        
+        a {
+            text-decoration: none;
+            color: var(--light-color);
+        }
+        
+        ul {
+            list-style: none;
+        }
+        
+        .header {
+            background-color: rgba(0, 0, 0, 0.8);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            padding: 1.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            letter-spacing: -1px;
+        }
+        
+        .logo span {
+            color: var(--light-color);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('img/Deadpool-e-Wolverine-tela-principal.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 2rem;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .login-container {
+            background-color: rgba(0, 0, 0, 0.75);
+            padding: 4rem;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 450px;
+            margin: 2rem auto;
+        }
+        
+        .login-title {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: white;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 4px;
+            background-color: #333;
+            color: white;
+            font-size: 1rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+        
+        .btn:hover {
+            background-color: #d4167f;
+        }
+        
+        .login-help {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .login-help a {
+            color: var(--secondary-color);
+        }
+        
+        .login-help a:hover {
+            text-decoration: underline;
+        }
+        
+        .signup-text {
+            margin-top: 2rem;
+            color: var(--secondary-color);
+        }
+        
+        .signup-text a {
+            color: white;
+            font-weight: bold;
+        }
+        
+        .signup-text a:hover {
+            text-decoration: underline;
+        }
+        
+        .footer {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-links a {
+            color: var(--secondary-color);
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .copyright {
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .header {
+                padding: 1rem;
+            }
+            
+            .logo {
+                font-size: 1.5rem;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .login-container {
+                padding: 2rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">Cine<span>Poços</span></div>
+        <nav class="nav-links">
+            <a href="#">Filmes</a>
+            <a href="#">Séries</a>
+            <a href="#">Recém-adicionados</a>
+            <a href="#">Minha lista</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Filmes ilimitados, TV shows e mais.</h1>
+            <p>Assista onde quiser. Cancele quando quiser.</p>
+        </div>
+    </section>
+
+    <div class="login-container">
+        <h1 class="login-title">Entrar</h1>
+        <form>
+            <div class="form-group">
+                <input type="email" class="form-control" placeholder="Email ou número de telefone" required>
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" placeholder="Senha" required>
+            </div>
+            <button type="submit" class="btn">Entrar</button>
+            <div class="login-help">
+                <label>
+                    <input type="checkbox"> Lembre-se de mim
+                </label>
+                <a href="#">Precisa de ajuda?</a>
+            </div>
+        </form>
+        <div class="signup-text">
+            <p>Novo na CinePoços? <a href="cadastroUsuario.html">Cadastre-se agora</a>.</p>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="#">Termos de Uso</a>
+            <a href="#">Privacidade</a>
+            <a href="#">Contato</a>
+            <a href="#">Sobre nós</a>
+        </div>
+        <p class="copyright">©Ana Teixeira - Instituto Federal do Sul de Minas Gerais - 2025</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Página de login carregada');
+            
+            const form = document.querySelector('form');
+            form.addEventListener('submit', function(e) {
+            const email = document.querySelector('input[type="email"]').value;
+            const password = document.querySelector('input[type="password"]').value;
+            
+            if (!email || !password) {
+                e.preventDefault();
+                alert('Por favor, preencha todos os campos.');
+            } else {
+                e.preventDefault();
+
+                window.location.href = 'paginaPrincipal.html';
+            }
+            });
+        });
+    </script>
+</body>
+</html>

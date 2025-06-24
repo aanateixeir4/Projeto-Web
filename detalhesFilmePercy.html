@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CinePoços - Percy Jackson e o Ladrão de Raios</title>
+    <style>
+        :root {
+            --primary-color: #d4167f;
+            --dark-color: #141414;
+            --light-color: #f4f4f4;
+            --accent-color: #f5c518;
+            --secondary-color: #6e6e6e;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+        
+        body {
+            background-color: var(--dark-color);
+            color: var(--light-color);
+            line-height: 1.6;
+        }
+        
+        a {
+            text-decoration: none;
+            color: var(--light-color);
+        }
+
+        .header {
+            background-color: rgba(0, 0, 0, 0.9);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            padding: 1rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+        
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            letter-spacing: -1px;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .main {
+            padding-top: 80px;
+            min-height: 100vh;
+        }
+ 
+        .movie-details {
+            display: flex;
+            gap: 3rem;
+            padding: 3rem 5rem;
+        }
+        
+        .movie-poster-container {
+            flex: 0 0 300px;
+        }
+        
+        .movie-poster {
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        .movie-info {
+            flex: 1;
+        }
+        
+        .movie-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--light-color);
+        }
+        
+        .movie-meta {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .meta-icon {
+            color: var(--primary-color);
+        }
+        
+        .movie-description {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+        
+        .movie-credits {
+            margin-bottom: 2rem;
+        }
+        
+        .credits-item {
+            margin-bottom: 0.8rem;
+        }
+        
+        .credits-label {
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #e72992;
+        }
+
+        .footer {
+            background-color: rgba(0, 0, 0, 0.9);
+            padding: 3rem 5rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-links-title {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
+        }
+        
+        .footer-links-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .footer-links-list a {
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+        
+        .footer-links-list a:hover {
+            color: var(--primary-color);
+        }
+        
+        .copyright {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--secondary-color);
+            color: var(--secondary-color);
+            font-size: 0.8rem;
+            text-align: center;
+        }
+
+        @media (max-width: 1024px) {
+            .movie-details, .footer {
+                padding-left: 3rem;
+                padding-right: 3rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .movie-details {
+                flex-direction: column;
+            }
+            
+            .movie-poster-container {
+                flex: 0 0 auto;
+                margin-bottom: 2rem;
+            }
+            
+            .movie-poster {
+                height: auto;
+                max-height: 500px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .header {
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .movie-details, .footer {
+                padding: 1.5rem;
+            }
+            
+            .movie-title {
+                font-size: 1.8rem;
+            }
+            
+            .movie-meta {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="logo">Cine<span>Poços</span></div>
+        <nav class="nav-links">
+            <a href="paginaPrincipal.html">Início</a>
+            <a href="filmes.html">Filmes</a>
+            <a href="trailers.html">Trailers</a>
+            <a href="contatos.html">Contatos</a>
+            <a href="sobre.html">Sobre</a>
+        </nav>
+    </header>
+
+    <main class="main">
+        <div class="movie-details">
+            <div class="movie-poster-container">
+                <img src="img/Percy Jackson e o Ladrao de Raios Poster Promocional" alt="Percy Jackson e o Ladrão de Raios" class="movie-poster">
+            </div>
+            <div class="movie-info">
+                <h1 class="movie-title">🎬 Percy Jackson e o Ladrão de Raios (2010)</h1>
+                
+                <div class="movie-meta">
+                    <span class="meta-item">
+                        <span class="meta-icon">🎥</span>
+                        <span>Direção: Chris Columbus</span>
+                    </span>
+                </div>
+                
+                <div class="movie-credits">
+                    <div class="credits-item">
+                        <span class="credits-label">👥 Elenco principal:</span>
+                        <span>Logan Lerman como Percy Jackson</span>
+                        <span>Brandon T. Jackson como Grover Underwood</span>
+                        <span>Alexandra Daddario como Annabeth Chase</span>
+                        <span>Pierce Brosnan como Chiron</span>
+                        <span>Sean Bean como Zeus</span>
+                        <span>Steve Coogan como Hades</span>
+                        <span>Uma Thurman como Medusa</span>
+                        <span>Catherine Keener como Sally Jackson</span>
+                    </div>
+                </div>
+                
+                <div class="movie-meta">
+                    <span class="meta-item">
+                        <span class="meta-icon">🎞️</span>
+                        <span>Gênero: Fantasia · Aventura · Família · Infantojuvenil</span>
+                    </span>
+                    <span class="meta-item">
+                        <span class="meta-icon">🔞</span>
+                        <span>Classificação indicativa: 12 anos</span>
+                    </span>
+                    <span class="meta-item">
+                        <span class="meta-icon">⏱️</span>
+                        <span>Duração: 119–120 minutos (aproximadamente 1 h 59 min)</span>
+                    </span>
+                </div>
+                
+                <p class="movie-description">
+                    📝 Sinopse: Percy Jackson descobre ser filho de Poseidon. Acusado de roubar o raio-mestre de Zeus e com sua mãe raptada por Hades, ele parte em uma jornada épica pelos EUA, acompanhado por seus amigos semideuses Grover e Annabeth. Seu objetivo: recuperar o raio e impedir uma guerra entre os deuses, enfrentando monstros da mitologia grega e superando desafios heroicos.
+                </p>
+                
+                <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+                    <button class="btn">Assistir Agora</button>
+                    <a href="https://www.youtube.com/watch?v=9LMQQpVVrSA&t=2s" class="btn" style="background-color: #333;">Ver Trailer</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div>
+                <h3 class="footer-links-title">Links Úteis</h3>
+                <div class="footer-links-list">
+                    <a href="#">Termos de Uso</a>
+                    <a href="#">Política de Privacidade</a>
+                    <a href="#">Ajuda</a>
+                </div>
+            </div>
+            <div>
+                <h3 class="footer-links-title">Sobre Nós</h3>
+                <div class="footer-links-list">
+                    <a href="#">Nossa História</a>
+                    <a href="#">Equipe</a>
+                    <a href="#">Contatos</a>
+                </div>
+            </div>
+        </div>
+        <p class="copyright">©Ana Teixeira - Instituto Federal do Sul de Minas - 2025</p>
+    </footer>
+</body>
+</html>
